@@ -5,6 +5,7 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{verbatim}
+\usepackage{float}
 
 \author{Jan Kramer\\Klaas Kliffen}
 \title{Computervision Lab 1}
@@ -122,6 +123,30 @@ So having higher resolution one one image does not decrease the number of mismat
 \end{table}
 
 \section*{Exercise 2}
+Matching the detail images from the street scene with the scene from David Lowe and vice-versa yields a low number of matches.
+This is expected, because the detail images should not be present in the source image. The number of matches can be seen in Table \ref{tab:mismatches}.
+\begin{table}[H]
+	\centering
+	\begin{tabular}{l|l|r}
+		Source image & detail image & Number of matches\\
+		\hline
+		scene & detail1 & 1\\
+		scene & detail2 & 0\\
+		scene & detail3 & 0\\
+		scene & detail4 & 2\\
+		scene & detail5 & 0\\
+		street & basmati & 1\\
+		street & book & 1\\
+		street & box & 2
+	\end{tabular}
+	\caption{Number of matches using Sift on detail images not present in the source image}
+	\label{tab:mismatches}
+\end{table}
+
+\noindent The number of matches is small if the detail image is not present, compared to the number of matches when a detail image that is present.
+Take for example the matches in Table \ref{tab:streetdetails} with the street scene (not large).
+The number of matches is a lot higher than the number of mismatches of the detail images in Table \ref{tab:mismatches}.
+Therefore a low percentage based threshold can be used to claim a real match. 
 
 \section*{Exercise 3}
 
@@ -169,5 +194,34 @@ The small fluctuations in the number of keys and matches is probably caused by h
 
 
 \section*{Exercise 4}
+\begin{figure}
+\centering
+    \includegraphics[width=0.9\textwidth]{./img/book-shear-100.png} \\
+\caption{The book sheared by 100 pixels.}
+\label{fig:sheared}
+\end{figure}
+
+The detail book image is sheared as in Figure \ref{fig:sheared} and compared to the orignal scene image from Figure \ref{fig:scenekeys}.
+The number of matches with different shear values can be seen in Table \ref{tab:sheared}.
+\begin{table}[H]
+	\centering
+	\begin{tabular}{l|r}
+		Shear amount  & Number of matches\\
+		\hline
+		0 pixels & 98\\
+		25 pixels & 100\\
+		50 pixels & 91\\
+		100 pixels & 42\\
+		200 pixels & 3\\
+		300 pixels & 0\\
+		400 pixels & 0
+	\end{tabular}
+	\caption{Number of matches using Sift on detail sheared detail images present in the source image}
+	\label{tab:sheared}
+\end{table}
+\noindent Up to 50 pixels of shear still yields a similar amount of matches compared to the original detail image.
+Higher values yield a significantly lower number of matches. Therefore it seems that SIFT is not shear invariant.\\
+
+\noindent The amount of shear which still yields tollarable results might depent on the size of the detail image. A shear of 100 pixels is almost a third of the original width of the image.
 
 \end{document}
