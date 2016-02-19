@@ -125,6 +125,49 @@ So having higher resolution one one image does not decrease the number of mismat
 
 \section*{Exercise 3}
 
+Table \ref{tab:bookrotation} shows how the number of matches and the number of keys of the book changes with rotation.
+The number of matches is rather stable.
+This is good, because SIFT is supposed to be invariant to rotation.
+Of course this does not mean that it is completely insensitive to rotation.
+When sift samples the gradient it does so in a 4 by 4 grid with 8 different rotations thus generating 128 keys.
+The also is the cause of the insensitivity to rotation.
+The small fluctuations in the number of keys and matches is probably caused by how fitting the alignment is for detecting significant features.
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c|c}
+        rotation (degrees) & \#matches & \#keys \\
+        \hline
+        0 & 98 & 882 \\
+        \hline
+        10 & 102 & 1020 \\
+        \hline
+        20 & 95 & 1016 \\
+        \hline
+        30 & 107 & 1031 \\
+        \hline
+        40 & 101 & 1055 \\
+        \hline
+        50 & 100 & 1055 \\
+        \hline
+        60 & 102 & 1053 \\
+        \hline
+        70 & 102 & 1019 \\
+        \hline
+        80 & 107 & 1042 \\
+        \hline
+        90 & 103 & 902 \\
+        \hline
+        180 & 98 & 907 \\
+        \hline
+        270 & 100 & 915 \\
+    \end{tabular}
+    \caption{The number of matches and keys of the book depending on the rotation.}
+    \label{tab:bookrotation}
+\end{table}
+
+
+
 \section*{Exercise 4}
 
 \end{document}
